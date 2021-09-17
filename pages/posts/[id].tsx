@@ -11,15 +11,15 @@ export default function BlogPost({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Article>
-      <h1>Post title: {post.title}</h1>
+      <h1>{post.title}</h1>
       <p>{post.body}</p>
     </Article>
   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const result = await fetch("http://jsonplaceholder.typicode.com/posts");
-  const posts: Post[] = await result.json();
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const posts: Post[] = await res.json();
 
   const paths = posts.map((post) => ({
     params: { id: post.id.toString() },
@@ -31,7 +31,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
+export const getStaticProps = async (context: GetStaticPropsContext) => {
   const { params } = context;
 
   const emptyPost: Post = {
@@ -49,10 +49,11 @@ export const getStaticProps = async (context) => {
     };
   }
 
-  const result = await fetch(
-    `http://jsonplaceholder.typicode.com/posts/${params.id}`
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${params.id}`
   );
-  const post: Post = await result.json();
+
+  const post: Post = await res.json();
 
   return {
     props: {
