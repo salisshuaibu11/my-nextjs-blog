@@ -74,7 +74,7 @@ export default function Home({
   );
 }
 
-export type Posts = {
+export type Post = {
   userId: number;
   id: number;
   title: string;
@@ -83,7 +83,7 @@ export type Posts = {
 
 export const getStaticProps = async () => {
   const result = await fetch("http://jsonplaceholder.typicode.com/posts");
-  const posts: Posts[] = await result.json();
+  const posts: Post[] = await result.json();
 
   return {
     props: {
