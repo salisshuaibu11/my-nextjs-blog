@@ -2,6 +2,7 @@ import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import styled from "@emotion/styled";
+import { FeedbackForm } from "@components/FeedBackForm";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -72,6 +73,7 @@ export default function Home({
             </Link>
           ))}
         </List>
+        <FeedbackForm />
       </Main>
     </Container>
   );
